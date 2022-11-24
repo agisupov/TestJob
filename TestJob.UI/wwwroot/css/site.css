@@ -1,0 +1,47 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+button {
+    margin: 4px;
+}
+
+.form-control {
+    margin: 4px 4px 4px -1px;
+}
+
+.form-group,
+.form-select-class,
+.form-check,
+.task-table {
+    margin: 4px;
+}
+.form-date {
+    margin: 4px 4px 4px 0;
+}
+
+.form-check .form-check-input {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: top;
+}

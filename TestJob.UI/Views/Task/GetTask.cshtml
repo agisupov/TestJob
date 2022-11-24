@@ -1,0 +1,82 @@
+﻿@using TestJob.UI.Models
+@{
+    ViewData["Title"] = "Task";
+}
+@model TaskPageViewModel
+
+
+ <form id="update-task">
+    <div class="modal-body">
+        <label id="taskId" hidden>@Model.Task.Id</label>
+        <div class="form-group">
+            <label>Task name</label>
+            <input class="form-control" id="create-task-name" placeholder="Enter task name" value="@Model.Task.TaskName">
+        </div>
+        <div class="form-group">
+            <label>Project</label>
+            <select class="form-select" id="create-project-name" aria-label="Default select example">
+                <option selected value="@Model.Task.Project.Id">@Model.Task.Project.ProjectName</option>
+                @foreach(var project in @Model.Projects)
+                {
+                    <option value="@project.Id">@project.ProjectName</option>
+                }
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Start time</label>
+            <input id="create-startdt" class="form-control" type="datetime-local" value="@Model.Task.StartDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ','T')">
+        </div>
+        <div class="form-group">
+            <label>End time</label>
+            <input id="create-enddt" class="form-control" type="datetime-local" value="@Model.Task.CancelDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ','T')">
+        </div>
+        <div class="form-group">
+            <label>Create time</label>
+            <input id="create-createdt" class="form-control" type="datetime-local" value="@Model.Task.CreateDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ','T')">
+        </div>
+        <div class="form-group">
+            <label>Update time</label>
+            <input id="create-updatedt" class="form-control" type="datetime-local" value="@Model.Task.UpdateDate.ToString("yyyy-MM-dd HH:mm:ss").Replace(' ','T')">
+        </div>
+            <div id="changed-block" class="form-group">
+            <h6 id="error"></h6>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Update data</button>
+    </div>
+</form>
+
+<div id="comments">
+    <table id="comment-table" class="table">
+        <thead>
+            <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Description</th>
+                <th scope="col">Delete</th>
+            </tr>
+            </thead>
+            <tbody>
+                @foreach(var comment in @Model.Task.TaskComments)
+                {
+            <tr id="@comment.Id">
+                <td scope="row">@comment.CommentType</td>
+                <td>@System.Text.Encoding.Default.GetString(@comment.Content)</td>
+                <td><button class="btn btn-danger" onclick="deleteComment('@comment.Id')">Delete task comment</button></td>
+            </tr>
+                }
+    </table>
+
+    <form id="create-comment">
+        <div class="mb-3">
+            <label class="form-label">Add comment</label>
+            <input id="comment-text" class="form-control" placeholder="Enter text">
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+    </form>
+
+</div>
+
+@section Scripts{
+    <script src="~/js/task.js"></script>
+}
